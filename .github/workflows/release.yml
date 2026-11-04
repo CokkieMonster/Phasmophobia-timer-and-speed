@@ -1,0 +1,73 @@
+# Builds the Windows app and publishes it as a GitHub Release.
+#
+# How to trigger it: push a version tag, e.g.
+#     git tag v1.0.0
+#     git push origin v1.0.0
+#
+# Why a GitHub runner: PyInstaller can only build a Windows .exe on
+# Windows, so this runs on GitHub's free Windows machine instead of your PC.
+
+name: Build and release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write   # needed to create the Release and upload the zip
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pyinstaller pytest
+
+      # Don't publish a release if the timer/speed logic is broken.
+      - name: Run tests
+        run: python -m pytest -q tests
+
+      # --onedir makes a folder (exe + its libraries) instead of one big exe.
+      # A one-file exe has to unpack itself to a temp folder every launch,
+      # which is slower and is exactly what many antivirus programs flag.
+      # The hidden imports tell PyInstaller about pynput's Windows backend,
+      # which pynput loads by name at runtime, so PyInstaller can't see it.
+      - name: Build with PyInstaller
+        run: >
+          pyinstaller --noconfirm --clean --onedir --windowed
+          --name PhasmoTimer
+          --icon assets/icon.ico
+          --hidden-import pynput.keyboard._win32
+          --hidden-import pynput.mouse._win32
+          run.py
+
+      - name: Zip the app folder
+        shell: pwsh
+        run: |
+          Copy-Item README.md, LICENSE dist/PhasmoTimer/
+          Compress-Archive -Path dist/PhasmoTimer -DestinationPath "PhasmoTimer-${{ github.ref_name }}-windows.zip"
+
+      - name: Publish the release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: PhasmoTimer-${{ github.ref_name }}-windows.zip
+          generate_release_notes: true
+          body: |
+            ### Download
+            1. Download **PhasmoTimer-${{ github.ref_name }}-windows.zip** below.
+            2. Right-click it, choose **Extract All**, then open the extracted `PhasmoTimer` folder.
+            3. Run **PhasmoTimer.exe**. If Windows says "Windows protected your PC", click **More info**, then **Run anyway**. The warning appears because the app isn't code-signed.
+            4. In Phasmophobia, set **Display Mode** to **Windowed Borderless**.
+
+            Default keys: F6 smudge, F7 hunt cooldown, F8 tap footsteps, F9 lock/unlock, F10 show/hide, F11 settings.
