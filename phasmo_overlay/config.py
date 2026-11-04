@@ -21,16 +21,17 @@ ACTIONS = [
 ]
 
 # A binding is a small dict:
-#   {"type": "key", "vk": 117, "name": "F6"}   keyboard key (vk = Windows virtual-key code)
+#   {"type": "key", "vk": 82, "name": "R"}     keyboard key (vk = Windows virtual-key code)
 #   {"type": "mouse", "button": "x1", "name": "Mouse4"}
-# vk codes: F6=117, F7=118 ... F11=122
+# vk codes: letters use their capital ASCII code (E=69, F=70, L=76,
+# P=80, R=82), F11=122. Matching by vk means Shift/Caps Lock don't matter.
 DEFAULTS = {
     "bindings": {
-        "smudge": {"type": "key", "vk": 117, "name": "F6"},
-        "hunt": {"type": "key", "vk": 118, "name": "F7"},
-        "tap": {"type": "key", "vk": 119, "name": "F8"},
-        "lock": {"type": "key", "vk": 120, "name": "F9"},
-        "hide": {"type": "key", "vk": 121, "name": "F10"},
+        "smudge": {"type": "key", "vk": 82, "name": "R"},
+        "hunt": {"type": "key", "vk": 69, "name": "E"},
+        "tap": {"type": "key", "vk": 70, "name": "F"},
+        "lock": {"type": "key", "vk": 76, "name": "L"},
+        "hide": {"type": "key", "vk": 80, "name": "P"},
         "settings": {"type": "key", "vk": 122, "name": "F11"},
     },
     "speed_modifier": 1.0,   # lobby ghost speed: 0.5 .. 1.5

@@ -36,12 +36,18 @@ To build the app folder yourself, run `build.bat`. The result is `dist\PhasmoTim
 
 | Key | Action |
 |-----|--------|
-| F6  | Smudge timer: press = start, press again = stop, **hold** = clear |
-| F7  | Hunt cooldown timer: same as above |
-| F8  | Tap once per ghost footstep |
-| F9  | Lock / unlock the overlay (unlocked = orange border, drag to move) |
-| F10 | Show / hide the overlay |
+| R   | Smudge timer: press = start, press again = stop, **hold** = clear |
+| E   | Hunt cooldown timer: same as above |
+| F   | Tap once per ghost footstep |
+| L   | Lock / unlock the overlay (unlocked = orange border, drag to move) |
+| P   | Show / hide the overlay |
 | F11 | Open settings |
+
+These keys are only *listened to*, not blocked, so the game still receives them too.
+If one clashes with a game control you use, rebind it in settings.
+
+If you ran an older version, your saved keys are kept. To get these defaults, delete
+`%APPDATA%\PhasmoTimer\config.json` or rebind in settings.
 
 While the overlay is **locked**, mouse clicks pass straight through it to the game.
 While it's **unlocked** you can drag it, and right-click opens settings.

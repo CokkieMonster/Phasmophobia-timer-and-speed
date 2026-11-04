@@ -5,6 +5,7 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
+from phasmo_overlay.config import DEFAULTS
 from phasmo_overlay.speed import TapSpeedMeter, bpm_to_speed
 from phasmo_overlay.timers import (HUNT_MARKERS, IDLE, RUNNING, SMUDGE_MARKERS,
                                    STOPPED, Stopwatch, current_hint, format_time)
@@ -69,3 +70,12 @@ def test_meter_idle_reset_and_window():
     assert m.tap_count() == 4  # only the last 4 kept
     m.tap(100.0)  # long pause -> new measurement
     assert m.tap_count() == 1
+
+
+def test_default_bindings_unique():
+    vks = []
+    bindings = DEFAULTS["bindings"]
+    for action in bindings:
+        vks.append(bindings[action]["vk"])
+    assert len(vks) == len(set(vks))
+    assert bindings["smudge"]["name"] == "R" and bindings["smudge"]["vk"] == ord("R")
