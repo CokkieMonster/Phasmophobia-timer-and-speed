@@ -38,13 +38,17 @@ To build the app folder yourself, run `build.bat`. The result is `dist\PhasmoTim
 |-----|--------|
 | R   | Smudge timer: press = start, press again = stop, **hold** = clear |
 | E   | Hunt cooldown timer: same as above |
-| F   | Tap once per ghost footstep |
+| Left click | Tap once per ghost footstep |
 | L   | Lock / unlock the overlay (unlocked = orange border, drag to move) |
 | P   | Show / hide the overlay |
 | F11 | Open settings |
 
 These keys are only *listened to*, not blocked, so the game still receives them too.
 If one clashes with a game control you use, rebind it in settings.
+
+**Left click counts every click as a footstep tap**, including in-game clicks and clicks in other windows.
+That's harmless: the speed only uses taps less than 3 s apart, so stray clicks just start a fresh measurement.
+Click 3+ times in rhythm with the footsteps to get a reading.
 
 If you ran an older version, your saved keys are kept. To get these defaults, delete
 `%APPDATA%\PhasmoTimer\config.json` or rebind in settings.
@@ -56,7 +60,7 @@ While it's **unlocked** you can drag it, and right-click opens settings.
 
 Open with F11. Settings are saved automatically to `%APPDATA%\PhasmoTimer\config.json`.
 
-- **Keybinds**: click a button and press any key, or Mouse3/Mouse4/Mouse5. Esc cancels. If you pick a key another action already uses, the two actions swap keys.
+- **Keybinds**: click a button and press any key, or a mouse button (Left click, Mouse3/Mouse4/Mouse5; right click is reserved). Esc cancels. If you pick a key another action already uses, the two actions swap keys.
 - **Lobby ghost speed**: set this to your lobby's ghost speed (50 to 150 %). The m/s shown is the ghost's *base* speed, so 1.7 m/s always means a normal ghost.
 - **Hold to clear**: how long to hold a timer key to clear it (default 0.6 s).
 - **Taps averaged**: more taps gives a steadier number, fewer reacts faster.

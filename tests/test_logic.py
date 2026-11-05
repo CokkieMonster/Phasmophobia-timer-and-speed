@@ -73,9 +73,16 @@ def test_meter_idle_reset_and_window():
 
 
 def test_default_bindings_unique():
-    vks = []
+    # Build an id per binding (key code or mouse button) and check no two
+    # default actions share one.
+    ids = []
     bindings = DEFAULTS["bindings"]
     for action in bindings:
-        vks.append(bindings[action]["vk"])
-    assert len(vks) == len(set(vks))
+        b = bindings[action]
+        if b["type"] == "mouse":
+            ids.append("mouse:" + b["button"])
+        else:
+            ids.append("vk:" + str(b["vk"]))
+    assert len(ids) == len(set(ids))
     assert bindings["smudge"]["name"] == "R" and bindings["smudge"]["vk"] == ord("R")
+    assert bindings["tap"] == {"type": "mouse", "button": "left", "name": "Left click"}

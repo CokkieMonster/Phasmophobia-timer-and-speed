@@ -30,11 +30,12 @@ VK_NAMES = {
 for _i in range(24):
     VK_NAMES[112 + _i] = "F" + str(_i + 1)  # vk 112 = F1 ... 135 = F24
 
-MOUSE_NAMES = {"middle": "Mouse3", "x1": "Mouse4", "x2": "Mouse5"}
+MOUSE_NAMES = {"left": "Left click", "middle": "Mouse3", "x1": "Mouse4", "x2": "Mouse5"}
 
-# Left and right click can't be bound: the game needs them, and you need
-# left click to use the settings window.
-BLOCKED_MOUSE = ("left", "right")
+# Right click can't be bound: it opens settings when the overlay is
+# unlocked. Left click *can* be bound (it's the default tap key). Like
+# every bind it is only listened to, so the click still reaches the game.
+BLOCKED_MOUSE = ("right",)
 
 
 def key_to_binding(key):

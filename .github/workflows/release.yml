@@ -70,4 +70,4 @@ jobs:
             3. Run **PhasmoTimer.exe**. If Windows says "Windows protected your PC", click **More info**, then **Run anyway**. The warning appears because the app isn't code-signed.
             4. In Phasmophobia, set **Display Mode** to **Windowed Borderless**.
 
-            Default keys: R smudge, E hunt cooldown, F tap footsteps, L lock/unlock, P show/hide, F11 settings (all rebindable).
+            Default keys: R smudge, E hunt cooldown, Left click tap footsteps, L lock/unlock, P show/hide, F11 settings (all rebindable).

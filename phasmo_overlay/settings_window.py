@@ -29,7 +29,8 @@ class SettingsWindow:
         # --- keybinds ---
         ttk.Label(frame, text="Keybinds", font=("Segoe UI", 10, "bold")).grid(row=row, column=0, sticky="w")
         row = row + 1
-        ttk.Label(frame, text="Click a button, then press a key or Mouse3/4/5. Esc cancels.",
+        ttk.Label(frame, text="Click a button, then press a key or mouse button\n"
+                              "(Left click, Mouse3/4/5). Esc cancels.",
                   foreground="#666").grid(row=row, column=0, columnspan=2, sticky="w", pady=(0, 6))
         row = row + 1
         for i in range(len(config.ACTIONS)):

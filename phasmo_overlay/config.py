@@ -22,14 +22,15 @@ ACTIONS = [
 
 # A binding is a small dict:
 #   {"type": "key", "vk": 82, "name": "R"}     keyboard key (vk = Windows virtual-key code)
-#   {"type": "mouse", "button": "x1", "name": "Mouse4"}
-# vk codes: letters use their capital ASCII code (E=69, F=70, L=76,
-# P=80, R=82), F11=122. Matching by vk means Shift/Caps Lock don't matter.
+#   {"type": "mouse", "button": "left", "name": "Left click"}
+#   mouse buttons: "left", "middle", "x1" (Mouse4), "x2" (Mouse5)
+# vk codes: letters use their capital ASCII code (E=69, L=76, P=80, R=82),
+# F11=122. Matching by vk means Shift/Caps Lock don't matter.
 DEFAULTS = {
     "bindings": {
         "smudge": {"type": "key", "vk": 82, "name": "R"},
         "hunt": {"type": "key", "vk": 69, "name": "E"},
-        "tap": {"type": "key", "vk": 70, "name": "F"},
+        "tap": {"type": "mouse", "button": "left", "name": "Left click"},
         "lock": {"type": "key", "vk": 76, "name": "L"},
         "hide": {"type": "key", "vk": 80, "name": "P"},
         "settings": {"type": "key", "vk": 122, "name": "F11"},
